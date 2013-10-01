@@ -1,0 +1,31 @@
+{
+  "name" : " Know citations needed",
+  "version" : "1.1",
+  "description" : "Shows citations for the missing citations in wikipedia",
+  "background" : {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "http://en.wikipedia.org/*"
+  ],
+  "page_action" :
+  {
+    "default_icon" : "sandwich-19.png",
+    "default_title" : "Missing citations added in this page"
+  },
+  "content_scripts" : [
+    {
+      "matches" : [
+        "http://en.wikipedia.org/*",
+        "https://en.wikipedia.org/*"
+      ],
+      "js" : ["contentscript.js"],
+      "run_at" : "document_idle",
+      "all_frames" : false
+    }
+  ],
+  "icons" : {
+    
+  },
+  "manifest_version": 2
+}
