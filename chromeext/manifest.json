@@ -1,31 +1,31 @@
 {
-  "name" : " Know citations needed",
-  "version" : "1.1",
-  "description" : "Shows citations for the missing citations in wikipedia",
-  "background" : {
-    "scripts": ["background.js"]
-  },
+  "name": "Know citations needed",
+  "version": "1.2",
+  "description": "Shows citations for the missing citations in wikipedia",
   "permissions": [
-    "http://en.wikipedia.org/*"
+    "activeTab"
   ],
-  "page_action" :
-  {
-    "default_icon" : "sandwich-19.png",
-    "default_title" : "Missing citations added in this page"
+  "host_permissions": [
+    "http://en.wikipedia.org/*",
+    "https://en.wikipedia.org/*",
+    "http://localhost:4567/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
   },
-  "content_scripts" : [
+  "action": {
+    "default_icon": "sandwich-19.png",
+    "default_title": "Missing citations added in this page"
+  },
+  "content_scripts": [
     {
-      "matches" : [
+      "matches": [
         "http://en.wikipedia.org/*",
         "https://en.wikipedia.org/*"
       ],
-      "js" : ["contentscript.js"],
-      "run_at" : "document_idle",
-      "all_frames" : false
+      "js": ["contentscript.js"],
+      "run_at": "document_idle"
     }
   ],
-  "icons" : {
-    
-  },
-  "manifest_version": 2
+  "manifest_version": 3
 }
