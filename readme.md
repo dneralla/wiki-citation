@@ -24,3 +24,18 @@ This project demonstrates a Chrome extension that replaces "citation needed" pla
 ## Using the extension
 
 Load the `chromeext/` directory as an unpacked extension in Chrome and navigate to a Wikipedia page containing "citation needed" markers. The extension will query the server for a citation and insert it into the page.
+
+## Continuous Integration
+
+A simple GitHub Actions workflow is included in `.github/workflows/ci.yml`. It installs the server dependencies and checks that `wikicit_server.py` compiles without errors. Push this repository to GitHub and open the **Actions** tab to see the workflow run. The URL of a run follows the pattern `https://github.com/<user>/<repo>/actions/runs/<run-id>`.
+
+## Live streaming server
+
+To share a webcam stream with a friend, install the additional dependency and run the streaming server:
+
+```bash
+pip install opencv-python
+python server/stream_server.py
+```
+
+The server listens on port 5000. Visit `http://<your-ip>:5000` from your phone's browser to see the stream and share that link with anyone on the same network.
