@@ -1,26 +1,34 @@
-# Wiki Citation Extension
+# Streaming App Example
 
-This project demonstrates a Chrome extension that replaces "citation needed" placeholders on Wikipedia with automatically generated references.
+This repository provides a minimal example of a live video streaming app. It consists of a Flask backend that authenticates with Google and returns a set of example streams, and a simple React Native front-end using Expo.
 
-- `chromeext/` – source for the browser extension.
-- `server/` – simple Flask server that queries an LLM for a citation suggestion.
+## Backend
 
-## Running the server
+The Flask server exposes two routes:
 
-1. Install dependencies:
-   ```bash
-   pip install -r server/requirements.txt
-   ```
-2. Set your OpenAI API key:
-   ```bash
-   export OPENAI_API_KEY=your-key
-   ```
-3. Start the server:
-   ```bash
-   python server/wikicit_server.py
-   ```
-   The server listens on `http://localhost:4567/get-topranked-citation`.
+- `/` – requires Google login and returns the user info plus a list of available streams
+- `/streams` – returns only the list of streams
 
-## Using the extension
+To run the server:
 
-Load the `chromeext/` directory as an unpacked extension in Chrome and navigate to a Wikipedia page containing "citation needed" markers. The extension will query the server for a citation and insert it into the page.
+```bash
+pip install -r server/requirements.txt
+export FLASK_SECRET=your-secret
+export GOOGLE_OAUTH_CLIENT_ID=your-client-id
+export GOOGLE_OAUTH_CLIENT_SECRET=your-client-secret
+python server/app.py
+```
+
+## Mobile App
+
+The `mobile` directory contains a basic React Native project. Install dependencies and start it with Expo:
+
+```bash
+cd mobile
+npm install
+npm start
+```
+
+You can then run the app on your phone using the Expo Go application. After logging in with Google, you can pick from one of the sample streams.
+
+This setup is intended as a starting point and does not include production deployment or binaries.
