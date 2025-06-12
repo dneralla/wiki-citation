@@ -24,3 +24,7 @@ This project demonstrates a Chrome extension that replaces "citation needed" pla
 ## Using the extension
 
 Load the `chromeext/` directory as an unpacked extension in Chrome and navigate to a Wikipedia page containing "citation needed" markers. The extension will query the server for a citation and insert it into the page.
+
+## Continuous Integration
+
+A simple GitHub Actions workflow is included in `.github/workflows/ci.yml`. It installs the server dependencies and checks that `wikicit_server.py` compiles without errors. Push this repository to GitHub and open the **Actions** tab to see the workflow run. The URL of a run follows the pattern `https://github.com/<user>/<repo>/actions/runs/<run-id>`.
