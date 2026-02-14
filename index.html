@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golf Swing Analyzer</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">G</div>
+  <div>
+    <h1>Golf Swing Analyzer</h1>
+    <p>Upload a swing image from any angle for instant analysis</p>
+  </div>
+</header>
+
+<div class="container">
+  <!-- Upload Section -->
+  <div id="upload-section">
+    <div class="upload-zone" id="dropZone">
+      <span class="icon">&#9971;</span>
+      <h2>Upload Your Swing Image</h2>
+      <p>Drag & drop an image here, or click to browse</p>
+      <p style="margin-top:8px;font-size:12px;color:#999">Supports JPG, PNG, WebP</p>
+      <input type="file" id="fileInput" accept="image/*">
+    </div>
+    <div class="settings-row">
+      <div class="setting-group">
+        <label>Camera Angle</label>
+        <select id="cameraAngle">
+          <option value="front">Front View</option>
+          <option value="side" selected>Side View (Face-on)</option>
+          <option value="dtl">Down the Line</option>
+          <option value="behind">Behind</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label>Swing Phase</label>
+        <select id="swingPhase">
+          <option value="address">Address / Setup</option>
+          <option value="backswing">Backswing</option>
+          <option value="top">Top of Backswing</option>
+          <option value="downswing">Downswing</option>
+          <option value="impact" selected>Impact</option>
+          <option value="follow">Follow-Through</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Analysis Workspace -->
+  <div id="workspace">
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="settings-inline">
+        <label>Angle:</label>
+        <select id="cameraAngle2">
+          <option value="front">Front</option>
+          <option value="side" selected>Side</option>
+          <option value="dtl">Down the Line</option>
+          <option value="behind">Behind</option>
+        </select>
+        <label>Phase:</label>
+        <select id="swingPhase2">
+          <option value="address">Address</option>
+          <option value="backswing">Backswing</option>
+          <option value="top">Top</option>
+          <option value="downswing">Downswing</option>
+          <option value="impact" selected>Impact</option>
+          <option value="follow">Follow-Through</option>
+        </select>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn btn-outline btn-sm" id="btnAutoDetect">Auto-Detect</button>
+      <button class="btn btn-outline btn-sm" id="btnReset">Reset Points</button>
+      <button class="btn btn-accent" id="btnAnalyze">Analyze Swing</button>
+      <button class="btn btn-outline btn-sm" id="btnNewImage">New Image</button>
+    </div>
+
+    <!-- Canvas Area -->
+    <div class="canvas-area">
+      <div class="canvas-container" id="canvasContainer">
+        <canvas id="imageCanvas"></canvas>
+        <canvas id="overlayCanvas"></canvas>
+        <div class="canvas-instructions" id="canvasInstructions">Drag markers to adjust key body positions</div>
+      </div>
+      <div class="loading-overlay" id="loadingOverlay" style="display:none">
+        <div class="spinner"></div>
+        <div class="loading-text" id="loadingText">Processing image...</div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Overall Score -->
+      <div class="panel" id="scorePanel" style="display:none">
+        <div class="score-banner">
+          <div class="score-number" id="overallScore">--</div>
+          <div class="score-label">Overall Swing Score</div>
+          <div class="score-bar">
+            <div class="score-bar-fill" id="scoreBarFill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Radar Chart -->
+      <div class="panel" id="radarPanel" style="display:none">
+        <div class="panel-header">Swing Profile</div>
+        <div class="panel-body">
+          <div class="radar-container">
+            <canvas id="radarCanvas" width="300" height="280"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics -->
+      <div class="panel" id="metricsPanel" style="display:none">
+        <div class="panel-header">Swing Metrics</div>
+        <div class="panel-body" id="metricsList"></div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="panel" id="feedbackPanel" style="display:none">
+        <div class="panel-header">Tips & Feedback</div>
+        <div class="panel-body" id="feedbackList"></div>
+      </div>
+
+      <!-- Display Options -->
+      <div class="panel">
+        <div class="panel-header">Display Options</div>
+        <div class="panel-body">
+          <div class="toggle-row">
+            <span>Show Overlay Lines</span>
+            <div class="toggle active" id="toggleOverlay" data-key="overlay"></div>
+          </div>
+          <div class="toggle-row">
+            <span>Show Angle Labels</span>
+            <div class="toggle active" id="toggleAngles" data-key="angles"></div>
+          </div>
+          <div class="toggle-row">
+            <span>Show Ideal Ghost</span>
+            <div class="toggle" id="toggleGhost" data-key="ghost"></div>
+          </div>
+          <div class="toggle-row">
+            <span>Show Edge Detection</span>
+            <div class="toggle" id="toggleEdges" data-key="edges"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Points -->
+      <div class="panel">
+        <div class="panel-header">Key Points</div>
+        <div class="panel-body">
+          <div class="keypoint-list" id="keypointList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
